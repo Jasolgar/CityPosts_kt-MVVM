@@ -6,4 +6,6 @@ data class Address (
     var city : String?,
     var zipCode : String?,
     var geo : Geo?
-)
+){
+    constructor() : this("","","","",Geo())
+}

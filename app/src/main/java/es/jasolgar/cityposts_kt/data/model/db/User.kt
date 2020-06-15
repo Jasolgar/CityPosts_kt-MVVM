@@ -19,4 +19,9 @@ data class User(
     @SerializedName("website") @Expose var website: String,
     @SerializedName("company") @Expose @Embedded var company: Company,
     @SerializedName("address") @Expose @Embedded var address: Address,
-    @Expose @ColumnInfo(name = "avatar_url") var avatarUrl: String)
+    @Expose @ColumnInfo(name = "avatar_url") var avatarUrl: String){
+
+    constructor() : this(0,"","","","","",
+        Company(),Address(),"")
+}
+

@@ -20,4 +20,6 @@ data class Post (
     @Expose @SerializedName("title") @ColumnInfo(name = "title")var title : String,
     @Expose @SerializedName("body") @ColumnInfo(name = "body")var body : String,
     @Expose @ColumnInfo(name = "image_url")var imageUrl : String
-)
+){
+    constructor() : this(0,0,"","","")
+}

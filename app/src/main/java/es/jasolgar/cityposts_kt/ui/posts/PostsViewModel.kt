@@ -40,7 +40,7 @@ class PostsViewModel(dataManager: DataManager,schedulerProvider: SchedulerProvid
                 }))
     }
 
-   private fun fetchData(): Observable<Boolean>? {
+   fun fetchData(): Observable<Boolean>? {
         return getDataManager().retrieveAllPostsInfo()
             .observeOn(getSchedulerProvider().ui())
             .flatMap {
