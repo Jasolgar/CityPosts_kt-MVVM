@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryColor">#0d47a1</color>
+    <color name="primaryLightColor">#5472d3</color>
+    <color name="primaryDarkColor">#002171</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="colorAccent">#c2185b</color>
+
+    <color name="line_divisor">#757575</color>
+
+    <!-- Fully transparent, equivalent to 0x00000000 -->
+    <color name="transparent">#00000000</color>
+</resources>

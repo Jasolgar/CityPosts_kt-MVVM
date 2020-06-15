@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="es.jasolgar.cityposts_kt.ui.posts.PostsItemViewModel"/>
+    </data>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="1dp"
+            android:onClick="@{() -> viewModel.onItemClick()}">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/card_post_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/post_image_max_height"
+                    android:scaleType="fitXY"
+                    app:image="@{viewModel.imageUrl}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/card_avatar_image"
+                    android:layout_width="@dimen/img_icons_size"
+                    android:layout_height="@dimen/img_icons_size"
+                    android:layout_margin="@dimen/margin_between_views"
+                    android:scaleType="fitXY"
+                    app:avatar="@{viewModel.avatarUrl}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card_post_image" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_title"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_between_views"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{viewModel.title}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/card_avatar_image"
+                    app:layout_constraintTop_toBottomOf="@id/card_post_image" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_author"
+                    style="@style/TextAppearance.MaterialComponents.Body1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_between_views"
+                    android:layout_marginTop="@dimen/min_margin_between_views"
+                    android:text="@{viewModel.author}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/card_avatar_image"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_body"
+                    style="@style/TextAppearance.MaterialComponents.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_between_views"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{viewModel.body}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_author" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+</layout>

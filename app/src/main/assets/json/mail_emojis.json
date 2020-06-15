@@ -1,0 +1,22 @@
+[
+  {
+    "ends_with": ".info",
+    "emoji": "U+FE0F"
+  },
+  {
+    "ends_with": ".co.uk",
+    "emoji": "U+1F1E7"
+  },
+  {
+    "ends_with": ".us",
+    "emoji": "U+1F1FA"
+  },
+  {
+    "ends_with": ".biz",
+    "emoji": "U+1F525"
+  },
+  {
+    "ends_with": ".tv",
+    "emoji": "U+1F4FA"
+  }
+]

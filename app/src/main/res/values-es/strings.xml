@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="post_title">Post</string>
+
+    <!--empty state-->
+    <string name="empty_screen">No tenemos nada \nen este momento.</string>
+    <string name="please_retry">Por favor, intenta de nuevo</string>
+    <string name="retry">Reintentar</string>
+
+    <string name="send_mail_extra_text_sample" >Gracias por usar esta aplicación. Por favor no olvide enviar comentarios</string>
+
+    <string name="remove_data_message" >¿Estás segura de que quieres eliminar los datos?</string>
+</resources>

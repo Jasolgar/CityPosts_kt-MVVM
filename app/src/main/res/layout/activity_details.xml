@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="es.jasolgar.cityposts_kt.ui.details.DetailsViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/card_post_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/post_image_max_height"
+                            android:scaleType="fitXY"
+                            app:image="@{viewModel.imageUrl}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/card_avatar_image"
+                            android:layout_width="@dimen/img_avatar_size"
+                            android:layout_height="@dimen/img_avatar_size"
+                            android:scaleType="fitXY"
+                            app:avatar="@{viewModel.avatarUrl}"
+                            app:layout_constraintBottom_toBottomOf="@id/card_post_image"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/card_post_image" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_full_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/min_margin_between_views"
+                            android:text="@{viewModel.userFullName}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/card_avatar_image" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_mail_icon"
+                            android:layout_width="@dimen/img_icons_size"
+                            android:layout_height="@dimen/img_icons_size"
+                            android:padding="@dimen/min_margin_between_views"
+                            android:layout_marginTop="@dimen/min_margin_between_views"
+                            android:layout_marginStart="@dimen/margin_between_views"
+                            android:onClick="@{()->viewModel.onMailClick()}"
+                            app:srcCompat="@drawable/ic_mail"
+                            app:layout_constraintTop_toBottomOf="@id/tv_full_name"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_mail_label"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="@dimen/margin_between_views"
+                            android:layout_marginEnd="@dimen/margin_between_views"
+                            android:text="@{viewModel.userMail}"
+                            android:gravity="center_vertical"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            android:onClick="@{()->viewModel.onMailClick()}"
+                            app:layout_constraintStart_toEndOf="@id/img_mail_icon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/img_mail_icon"
+                            app:layout_constraintBottom_toBottomOf="@id/img_mail_icon"/>
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_address_icon"
+                            android:layout_width="@dimen/img_icons_size"
+                            android:layout_height="@dimen/img_icons_size"
+                            android:padding="@dimen/min_margin_between_views"
+                            android:layout_marginTop="@dimen/min_margin_between_views"
+                            android:layout_marginStart="@dimen/margin_between_views"
+                            android:onClick="@{()->viewModel.onAddressClick()}"
+                            app:srcCompat="@drawable/ic_location"
+                            app:layout_constraintTop_toBottomOf="@id/img_mail_icon"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_address_label"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="@dimen/margin_between_views"
+                            android:layout_marginEnd="@dimen/margin_between_views"
+                            android:gravity="center_vertical"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            android:onClick="@{()->viewModel.onAddressClick()}"
+                            android:text="@{viewModel.userAddress}"
+                            app:layout_constraintStart_toEndOf="@id/img_address_icon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/img_address_icon"
+                            app:layout_constraintBottom_toBottomOf="@id/img_address_icon"/>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_phone_icon"
+                            android:layout_width="@dimen/img_icons_size"
+                            android:layout_height="@dimen/img_icons_size"
+                            android:padding="@dimen/min_margin_between_views"
+                            android:layout_marginTop="@dimen/min_margin_between_views"
+                            android:layout_marginStart="@dimen/margin_between_views"
+                            android:onClick="@{()->viewModel.onPhoneClick()}"
+                            app:srcCompat="@drawable/ic_phone"
+                            app:layout_constraintTop_toBottomOf="@id/img_address_icon"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_phone_label"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="@dimen/margin_between_views"
+                            android:layout_marginEnd="@dimen/margin_between_views"
+                            android:gravity="center_vertical"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            android:onClick="@{()->viewModel.onPhoneClick()}"
+                            android:text="@{viewModel.userPhone}"
+                            app:layout_constraintStart_toEndOf="@id/img_phone_icon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/img_phone_icon"
+                            app:layout_constraintBottom_toBottomOf="@id/img_phone_icon"/>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_web_icon"
+                            android:layout_width="@dimen/img_icons_size"
+                            android:layout_height="@dimen/img_icons_size"
+                            android:padding="@dimen/min_margin_between_views"
+                            android:layout_marginTop="@dimen/min_margin_between_views"
+                            android:layout_marginStart="@dimen/margin_between_views"
+                            android:onClick="@{()->viewModel.onWebClick()}"
+                            app:srcCompat="@drawable/ic_language"
+                            app:layout_constraintTop_toBottomOf="@id/img_phone_icon"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_web_label"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="@dimen/margin_between_views"
+                            android:layout_marginEnd="@dimen/margin_between_views"
+                            android:gravity="center_vertical"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            android:text="@{viewModel.userWeb}"
+                            android:onClick="@{()->viewModel.onWebClick()}"
+                            app:layout_constraintStart_toEndOf="@id/img_web_icon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/img_web_icon"
+                            app:layout_constraintBottom_toBottomOf="@id/img_web_icon"/>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_company_icon"
+                            android:layout_width="@dimen/img_icons_size"
+                            android:layout_height="@dimen/img_icons_size"
+                            android:padding="@dimen/min_margin_between_views"
+                            android:layout_marginTop="@dimen/min_margin_between_views"
+                            android:layout_marginStart="@dimen/margin_between_views"
+                            app:srcCompat="@drawable/ic_work"
+                            app:layout_constraintTop_toBottomOf="@id/img_web_icon"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_company_label"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="@dimen/margin_between_views"
+                            android:layout_marginEnd="@dimen/margin_between_views"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:text="@{viewModel.userCompany}"
+                            app:layout_constraintStart_toEndOf="@id/img_company_icon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/img_company_icon"
+                            app:layout_constraintBottom_toBottomOf="@id/img_company_icon"/>
+
+                    <View
+                        android:id="@+id/user_info_separator"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="@dimen/min_margin_between_views"
+                        app:layout_constraintTop_toBottomOf="@id/tv_company_label"
+                        android:background="@drawable/shadow"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_posts_body"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_between_views"
+                        android:gravity="center_vertical"
+                        android:text="@{viewModel.postsBody}"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/user_info_separator" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_comment_count_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_comment_black_24dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toStartOf="@id/tv_comment_count_label"
+                        app:layout_constraintTop_toBottomOf="@id/tv_posts_body"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_comment_count_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_between_views"
+                        android:layout_marginEnd="@dimen/margin_between_views"
+                        android:gravity="center_vertical"
+                        android:text="@{viewModel.commentsCount}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/img_comment_count_icon"
+                        app:layout_constraintBottom_toBottomOf="@id/img_comment_count_icon"/>
+
+                    <View
+                        android:id="@+id/post_body_separator"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="@dimen/min_margin_between_views"
+                        app:layout_constraintTop_toBottomOf="@id/img_comment_count_icon"
+                        android:background="@drawable/shadow"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclew_comments"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:listitem="@layout/item_comment"
+                            android:layout_marginTop="@dimen/margin_between_views"
+                            android:layout_marginBottom="@dimen/margin_between_views"
+                            app:layout_constraintTop_toBottomOf="@id/post_body_separator"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/bottom_loading"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_transparent"
+            app:elevation="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:theme="@style/ThemeOverlay.AppCompat">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

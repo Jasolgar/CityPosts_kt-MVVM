@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">CityPosts</string>
+    <string name="post_title">CityPosts</string>
+
+    <!--empty state-->
+    <string name="empty_screen">We do not have anything\nhere right now.</string>
+    <string name="please_retry">Please Retry</string>
+    <string name="retry">Retry</string>
+
+    <!-- Send mail -->
+    <string name="send_mail_extra_text_sample" >Thanks for use this app. Please don\'t forgot send feedback</string>
+    <string name="remove_data_message" >Are you sure you want to remove the data ? </string>
+</resources>
