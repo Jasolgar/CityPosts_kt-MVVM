@@ -4,13 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
+import dagger.hilt.android.AndroidEntryPoint
 import es.jasolgar.cityposts_kt.BR
 import es.jasolgar.cityposts_kt.R
 import es.jasolgar.cityposts_kt.ViewModelProviderFactory
@@ -19,11 +16,8 @@ import es.jasolgar.cityposts_kt.ui.base.BaseActivity
 import es.jasolgar.cityposts_kt.ui.posts.PostsFragment
 import javax.inject.Inject
 
-
-class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>(), MainNavigator, HasSupportFragmentInjector {
-
-    @Inject
-    lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+@AndroidEntryPoint
+class MainActivity @Inject constructor() : BaseActivity<ActivityMainBinding,MainViewModel>(), MainNavigator {
 
     @Inject
     lateinit var factory: ViewModelProviderFactory
@@ -53,10 +47,6 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>(), MainNavi
         return mMainViewModel
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment?>? {
-        return fragmentDispatchingAndroidInjector
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -67,7 +57,7 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>(), MainNavi
 
         setSupportActionBar(mToolbar)
 
-        setUpViewBinding();
+        setUpViewBinding()
     }
 
     private fun setUpViewBinding() {}
@@ -94,4 +84,6 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>(), MainNavi
             super.onBackPressed()
         }
     }
+
+
 }

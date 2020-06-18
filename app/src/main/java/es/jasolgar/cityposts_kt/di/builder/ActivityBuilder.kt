@@ -1,24 +1,24 @@
 package es.jasolgar.cityposts_kt.di.builder
 
+import dagger.Binds
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import es.jasolgar.cityposts_kt.ui.details.DetailsActivity
-import es.jasolgar.cityposts_kt.ui.details.DetailsActivityModule
 import es.jasolgar.cityposts_kt.ui.main.MainActivity
-import es.jasolgar.cityposts_kt.ui.posts.PostsFragmentProvider
 import es.jasolgar.cityposts_kt.ui.splash.SplashActivity
 
-
-@Module
+//@InstallIn(ApplicationComponent::class)
+//@Module
 abstract class ActivityBuilder {
 
-    @ContributesAndroidInjector
-    abstract fun bindSplashActivity(): SplashActivity?
+    //@Binds
+    abstract fun bindSplashActivity(): SplashActivity
 
-    @ContributesAndroidInjector(modules = [DetailsActivityModule::class])
-    abstract fun bindDetailsActivity(): DetailsActivity?
+    //@Binds
+    abstract fun bindDetailsActivity(): DetailsActivity
 
-    @ContributesAndroidInjector(modules = [PostsFragmentProvider::class])
-    abstract fun bindMainActivity(): MainActivity?
+    //@Binds
+    abstract fun bindMainActivity(): MainActivity
 
 }

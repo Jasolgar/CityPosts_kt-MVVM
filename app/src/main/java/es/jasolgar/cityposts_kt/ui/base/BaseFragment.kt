@@ -10,7 +10,6 @@ import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import dagger.android.support.AndroidSupportInjection
 
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>>() : Fragment() {
@@ -49,7 +48,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>>() : Fragm
     }
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
-        performDependencyInjection()
         super.onCreate(savedInstanceState)
         mViewModel = getViewModel()
         setHasOptionsMenu(false)
@@ -80,8 +78,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>>() : Fragm
     open fun getBaseActivity(): BaseActivity<*, *>? { return mActivity }
 
     open fun getViewDataBinding(): T {  return mViewDataBinding!!  }
-
-    private fun performDependencyInjection() {  AndroidSupportInjection.inject(this) }
 
     abstract fun onBackPressed(): Boolean
 

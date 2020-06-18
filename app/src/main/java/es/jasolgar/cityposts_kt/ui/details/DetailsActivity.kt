@@ -1,12 +1,14 @@
 package es.jasolgar.cityposts_kt.ui.details
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -14,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import es.jasolgar.cityposts_kt.BR
 import es.jasolgar.cityposts_kt.R
 import es.jasolgar.cityposts_kt.ViewModelProviderFactory
@@ -23,14 +26,14 @@ import es.jasolgar.cityposts_kt.ui.base.BaseActivity
 import es.jasolgar.cityposts_kt.utils.AppLogger
 import javax.inject.Inject
 
-
-class DetailsActivity : BaseActivity<ActivityDetailsBinding,DetailsViewModel>() , DetailsNavigator {
+@AndroidEntryPoint
+class DetailsActivity @Inject constructor()  : BaseActivity<ActivityDetailsBinding,DetailsViewModel>() , DetailsNavigator {
 
     companion object{
         private const val BUNDLE_POST_ID = "bundle_post_id"
         private const val REQUEST_PERMISSION_PHONE_CALL = 0
 
-        fun newIntent(context: Context, postId: Long): Intent {
+        fun newIntent(context: Activity, postId: Long): Intent {
             val intent = Intent(context, DetailsActivity::class.java)
             intent.putExtra(BUNDLE_POST_ID, postId)
             return intent

@@ -1,20 +1,14 @@
 package es.jasolgar.cityposts_kt.ui.base
 
 import android.app.ProgressDialog
-import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.AttributeSet
 import android.view.MenuItem
-import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import dagger.android.AndroidInjection
 
-
-abstract class BaseActivity< T : ViewDataBinding, V : BaseViewModel<*>> : AppCompatActivity(), BaseFragment.Callback{
+abstract class BaseActivity< T : ViewDataBinding, V : BaseViewModel<*>>  : AppCompatActivity(), BaseFragment.Callback{
 
     private val mProgressDialog: ProgressDialog? = null
     private var mViewDataBinding: T? = null
@@ -46,13 +40,10 @@ abstract class BaseActivity< T : ViewDataBinding, V : BaseViewModel<*>> : AppCom
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        performDependencyInjection()
         performDataBinding()
     }
 
     open fun getViewDataBinding(): T { return mViewDataBinding!! }
-
-    open fun performDependencyInjection() { AndroidInjection.inject(this) }
 
     private fun performDataBinding() {
         mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())

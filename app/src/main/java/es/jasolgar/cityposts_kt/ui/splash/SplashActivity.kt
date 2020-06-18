@@ -3,6 +3,7 @@ package es.jasolgar.cityposts_kt.ui.splash
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.android.AndroidEntryPoint
 import es.jasolgar.cityposts_kt.BR
 import es.jasolgar.cityposts_kt.R
 import es.jasolgar.cityposts_kt.ViewModelProviderFactory
@@ -11,7 +12,7 @@ import es.jasolgar.cityposts_kt.ui.base.BaseActivity
 import es.jasolgar.cityposts_kt.ui.main.MainActivity
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding,SplashViewModel>(), SplashNavigator {
 
     @Inject

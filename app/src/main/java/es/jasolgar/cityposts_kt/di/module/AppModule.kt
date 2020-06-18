@@ -2,11 +2,16 @@ package es.jasolgar.cityposts_kt.di.module
 
 import android.app.Application
 import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import es.jasolgar.cityposts_kt.data.AppDataManager
 import es.jasolgar.cityposts_kt.data.DataManager
 import es.jasolgar.cityposts_kt.data.local.db.AppDatabase
@@ -18,6 +23,8 @@ import es.jasolgar.cityposts_kt.data.remote.ApiHelper
 import es.jasolgar.cityposts_kt.data.remote.AppApiHelper
 import es.jasolgar.cityposts_kt.di.DatabaseInfo
 import es.jasolgar.cityposts_kt.di.PreferenceInfo
+import es.jasolgar.cityposts_kt.ui.base.BaseActivity
+import es.jasolgar.cityposts_kt.ui.posts.PostsFragment
 import es.jasolgar.cityposts_kt.utils.AppConstants
 import es.jasolgar.cityposts_kt.utils.rx.AppSchedulerProvider
 import es.jasolgar.cityposts_kt.utils.rx.SchedulerProvider
@@ -26,6 +33,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 
+@InstallIn(ApplicationComponent::class)
 @Module
 class AppModule {
 
@@ -49,8 +57,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideContext(application: Application): Context {
-        return application
+    fun provideApplication(application: Application): Context {
+        return application as Context
     }
 
     @Provides
@@ -98,5 +106,16 @@ class AppModule {
             .writeTimeout(30, TimeUnit.SECONDS)
             .build()
     }
+
+    @Provides
+    fun provideLinearLayoutManager(context: Context): LinearLayoutManager {
+        return LinearLayoutManager(context)
+    }
+
+    @Provides
+    fun provideBaseActivity(fragment: Fragment): BaseActivity<*, *> {
+        return fragment.activity as BaseActivity<*, *>
+    }
+
 
 }

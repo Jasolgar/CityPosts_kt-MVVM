@@ -2,12 +2,12 @@ package es.jasolgar.cityposts_kt.ui.base
 
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import es.jasolgar.cityposts_kt.data.DataManager
 import es.jasolgar.cityposts_kt.utils.rx.SchedulerProvider
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import java.lang.ref.WeakReference
-
 
 open class BaseViewModel<N>() : ViewModel() {
 

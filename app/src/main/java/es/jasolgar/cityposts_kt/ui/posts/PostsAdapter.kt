@@ -1,15 +1,21 @@
 package es.jasolgar.cityposts_kt.ui.posts
 
+import android.app.Activity
 import android.app.ActivityOptions
+import android.app.Application
+import android.content.Context
 import android.os.Build
+import android.os.Bundle
 import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import es.jasolgar.cityposts_kt.data.model.others.PostInfo
 import es.jasolgar.cityposts_kt.databinding.ItemPostBinding
 import es.jasolgar.cityposts_kt.databinding.ItemPostEmptyViewBinding
+import es.jasolgar.cityposts_kt.ui.base.BaseActivity
 import es.jasolgar.cityposts_kt.ui.base.BaseViewHolder
 import es.jasolgar.cityposts_kt.ui.details.DetailsActivity
 import es.jasolgar.cityposts_kt.ui.main.MainActivity
@@ -21,18 +27,16 @@ import java.io.IOException
 import javax.inject.Inject
 
 
-class PostsAdapter @Inject constructor(context: MainActivity) : RecyclerView.Adapter<BaseViewHolder>() {
+class PostsAdapter @Inject constructor(val context: Context, val onItemEvent : PostItemEvents) : RecyclerView.Adapter<BaseViewHolder>() {
 
     companion object{
         const val VIEW_TYPE_EMPTY : Int = 0
         const val VIEW_TYPE_NORMAL : Int = 1
     }
 
-    var postInfoList: MutableList<PostInfo> = mutableListOf<PostInfo>()
+    var postInfoList: MutableList<PostInfo> = mutableListOf()
 
     lateinit var mListener: PostItemEmptyViewModelListener
-
-    val mContext: MainActivity = context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
@@ -91,6 +95,7 @@ class PostsAdapter @Inject constructor(context: MainActivity) : RecyclerView.Ada
         notifyDataSetChanged()
     }
 
+
     inner class PostItemViewHolder(binding: ItemPostBinding) : BaseViewHolder(binding.root) ,  PostsItemViewModel.PostItemViewModelListener{
 
         private val mBinding: ItemPostBinding = binding
@@ -110,15 +115,10 @@ class PostsAdapter @Inject constructor(context: MainActivity) : RecyclerView.Ada
 
         override fun onItemClick(postId: Long) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                val options = ActivityOptions.makeSceneTransitionAnimation(mContext,
-                    Pair.create<View,String>(mBinding.cardPostImage, mBinding.cardPostImage.transitionName ),
-                    Pair.create<View,String>(mBinding.cardAvatarImage, mBinding.cardAvatarImage.transitionName ))
 
-                mContext.startActivity(
-                    DetailsActivity.newIntent(mContext, postId),
-                    options.toBundle())
+                onItemEvent.onItemClick(postId, arrays = arrayOf(mBinding.cardPostImage,mBinding.cardAvatarImage))
             } else
-                mContext.startActivity(DetailsActivity.newIntent(mContext, postId))
+                onItemEvent.onItemClick(postId,null)
         }
 
     }
@@ -134,7 +134,7 @@ class PostsAdapter @Inject constructor(context: MainActivity) : RecyclerView.Ada
             try {
                 mBinding?.imvEmpty?.setImageBitmap(
                     CommonUtils.loadFileFromAsset(
-                        mContext,
+                        context,
                         AppConstants.ASSETS_EMPTY_IMAGE
                     )
                 )
@@ -147,5 +147,9 @@ class PostsAdapter @Inject constructor(context: MainActivity) : RecyclerView.Ada
             mListener.onRetryClick()
         }
 
+    }
+
+    interface PostItemEvents{
+       fun onItemClick(postId: Long, arrays:  Array<View>?)
     }
 }

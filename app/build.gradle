@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 29
@@ -68,10 +69,13 @@ dependencies {
     kapt  "androidx.room:room-compiler:$rootProject.roomDatabaseVersion"
 
     // dependency injection
-    implementation "com.google.dagger:dagger-android:$rootProject.dagger2Version"
-    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger2Version" // if you use the support libraries
-    kapt  "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"
-    kapt  "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+    //implementation "com.google.dagger:dagger-android:$rootProject.dagger2Version"
+    //implementation "com.google.dagger:dagger-android-support:$rootProject.dagger2Version" // if you use the support libraries
+    //kapt  "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"
+    //kapt  "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+
+    implementation "com.google.dagger:hilt-android:$rootProject.hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$rootProject.hilt_version"
 
     //glide
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
@@ -91,7 +95,7 @@ dependencies {
     // dependencies for local unit tests
     androidTestImplementation "androidx.test.ext:junit:$junitVersion"
     testImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
-    testAnnotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+    //testAnnotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
 
     // UI Testing
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
