@@ -3,12 +3,11 @@ package es.jasolgar.cityposts_kt.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -29,7 +28,10 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>(), MainNavi
     @Inject
     lateinit var factory: ViewModelProviderFactory
 
-    private lateinit var mMainViewModel: MainViewModel
+    private val mMainViewModel: MainViewModel by lazy {
+        ViewModelProvider(this@MainActivity, factory).get(MainViewModel::class.java)
+    }
+
     private lateinit var mActivityMainBinding: ActivityMainBinding
     private lateinit var mToolbar: Toolbar
 
@@ -48,7 +50,6 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>(), MainNavi
     }
 
     override fun getViewModel(): MainViewModel {
-        mMainViewModel =  ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
         return mMainViewModel
     }
 

@@ -7,12 +7,11 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import es.jasolgar.cityposts_kt.BR
@@ -49,7 +48,10 @@ class DetailsActivity : BaseActivity<ActivityDetailsBinding,DetailsViewModel>() 
 
     private lateinit var mActivityDetailsBinding: ActivityDetailsBinding
 
-    private lateinit var mDetailsViewModel: DetailsViewModel
+    private val mDetailsViewModel: DetailsViewModel by lazy {
+        ViewModelProvider(this@DetailsActivity, factory).get(DetailsViewModel::class.java)
+    }
+
     private lateinit var mToolbar: Toolbar
     private lateinit var pendingPhone: String
 
@@ -103,7 +105,6 @@ class DetailsActivity : BaseActivity<ActivityDetailsBinding,DetailsViewModel>() 
     }
 
     override fun getViewModel(): DetailsViewModel {
-        mDetailsViewModel = ViewModelProviders.of(this, factory).get(DetailsViewModel::class.java)
         return mDetailsViewModel
     }
 

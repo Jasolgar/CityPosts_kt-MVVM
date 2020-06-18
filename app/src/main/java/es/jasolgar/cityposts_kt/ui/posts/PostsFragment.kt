@@ -3,7 +3,7 @@ package es.jasolgar.cityposts_kt.ui.posts
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import es.jasolgar.cityposts_kt.BR
@@ -27,7 +27,9 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel >(),  Po
         }
     }
 
-    private lateinit var mPostViewModel: PostsViewModel
+    private val mPostViewModel: PostsViewModel by lazy {
+        ViewModelProvider(this@PostsFragment, factory).get(PostsViewModel::class.java)
+    }
 
     private lateinit var mFragmentPostSourceBinding: FragmentPostsBinding
 
@@ -45,7 +47,6 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel >(),  Po
     override fun getLayoutId(): Int { return R.layout.fragment_posts  }
 
     override fun getViewModel(): PostsViewModel {
-        mPostViewModel =  ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
         return mPostViewModel
     }
 

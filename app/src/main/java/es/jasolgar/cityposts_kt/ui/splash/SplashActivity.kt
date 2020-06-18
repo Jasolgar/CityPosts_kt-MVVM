@@ -17,7 +17,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding,SplashViewModel>(), Sp
     @Inject
     lateinit var factory: ViewModelProviderFactory
 
-    private lateinit var mSplashViewModel: SplashViewModel
+    private val mSplashViewModel: SplashViewModel by lazy {
+        ViewModelProvider(this@SplashActivity, factory).get(SplashViewModel::class.java)
+    }
 
     override fun getBindingVariable(): Int {
         return BR.viewModel
@@ -27,8 +29,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding,SplashViewModel>(), Sp
         return R.layout.activity_splash
     }
 
-    override fun getViewModel(): SplashViewModel {
-        mSplashViewModel = ViewModelProvider(this, factory).get(SplashViewModel::class.java)
+    override fun getViewModel(): SplashViewModel { 
         return mSplashViewModel
     }
 
